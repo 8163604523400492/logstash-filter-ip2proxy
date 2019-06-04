@@ -1,7 +1,7 @@
 # IP2Proxy Filter Plugin
-This is IP2Proxy filter plugin for Logstash that enables Logstash's users to query an IP address if it was being used as open proxy, web proxy, VPN anonymizer and TOR exits. It also appends country, state, city and ISP information of the server. The library took the proxy IP address from **IP2Proxy BIN Data** file.
+This is IP2Proxy filter plugin for Logstash that enables Logstash's users to reverse search of IP address to detect VPN servers, open proxies, web proxies, Tor exit nodes, search engine robots and data center ranges using IP2Proxy BIN database. Other information available includes proxy type, country, state, city, ISP, domain name, usage type, AS number, AS name and last seen date. The library took the proxy IP address from **IP2Proxy BIN Data** file.
 
-For the methods to use IP2Proxy filter plugin with Elastic Stack (Elasticsearch, Filebeat, Logstash, and Kibana), please take a look on this [tutorial](https://www.ip2location.com/tutorials/how-to-use-ip2proxy-filter-plugin-with-elastic-stack).
+For the methods to use IP2Proxy filter plugin with Elastic Stack (Elasticsearch, Filebeat, Logstash, and Kibana), please take a look on this [tutorial](https://blog.ip2location.com/knowledge-base/how-to-use-ip2proxy-filter-plugin-with-elastic-stack).
 
 
 ## Dependencies (IP2PROXY BIN DATA FILE)
@@ -55,15 +55,20 @@ output {
 ## Sample Output
 |Field|Description|
 |---|---|
+|ip2proxy.as|the autonomous system (AS) name of proxy's IP address or domain name|
+|ip2proxy.asn|the autonomous system number (ASN) of proxy's IP address or domain name|
 |ip2proxy.city|the city name of the proxy|
 |ip2proxy.country_long|the ISO3166-1 country name of the proxy|
 |ip2proxy.country_short|the ISO3166-1 country code (two-characters) of the proxy|
+|ip2proxy.domain|the domain name of proxy's IP address or domain name|
 |ip2proxy.is_proxy|Check whether if an IP address was a proxy. Returned value:<ul><li>-1 : errors</li><li>0 : not a proxy</li><li>1 : a proxy</li><li>2 : a data center IP address</li></ul>|
 |ip2proxy.isp|the ISP name of the proxy|
-|ip2proxy.proxy_type|the proxy type. Please visit <a href="https://www.ip2location.com/databases/px4-ip-proxytype-country-region-city-isp" target="_blank">IP2Location</a> for the list of proxy types supported|
-|ip2proxy.region|the ISO3166-2 region name of the proxy|
+|ip2proxy.last_seen|the last seen days ago value of proxy's IP address or domain name|
+|ip2proxy.proxy_type|the proxy type. Please visit  <a href="https://www.ip2location.com/database/px8-ip-proxytype-country-region-city-isp-domain-usagetype-asn-lastseen" target="_blank">IP2Location</a> for the list of proxy types supported|
+|ip2proxy.region|the ISO3166-2 region name of the proxy. Please visit <a href="https://www.ip2location.com/free/iso3166-2" target="_blank">ISO3166-2 Subdivision Code</a> for the information of ISO3166-2 supported|
+|ip2proxy.usage_type|the usage type classification of the proxy. Please visit <a href="https://www.ip2location.com/database/px8-ip-proxytype-country-region-city-isp-domain-usagetype-asn-lastseen" target="_blank">IP2Location</a> for the list of usage types supported|
 
-![Example of data](https://www.ip2location.com/images/tutorial/logstash-filter-ip2proxy-screenshot.png)
+![Example of data](https://www.ip2location.com/assets/img/logstash-filter-ip2proxy-screenshot.png)
 
 
 ## Support

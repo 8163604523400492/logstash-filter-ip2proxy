@@ -21,7 +21,7 @@ class LogStash::Filters::IP2Proxy < LogStash::Filters::Base
   public
   def register
     if @database.nil?
-      @database = ::Dir.glob(::File.join(::File.expand_path("../../../vendor/", ::File.dirname(__FILE__)),"IP2PROXY-LITE-PX4.BIN")).first
+      @database = ::Dir.glob(::File.join(::File.expand_path("../../../vendor/", ::File.dirname(__FILE__)),"IP2PROXY-LITE-PX8.BIN")).first
 
       if @database.nil? || !File.exists?(@database)
         raise "You must specify 'database => ...' in your ip2proxy filter (I looked for '#{@database}')"
