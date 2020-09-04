@@ -2,7 +2,7 @@
 require_relative '../spec_helper'
 require "logstash/filters/ip2proxy"
 
-IP2PROXYDB = ::Dir.glob(::File.expand_path("../../vendor/", ::File.dirname(__FILE__))+"/IP2PROXY-LITE-PX8.BIN").first
+IP2PROXYDB = ::Dir.glob(::File.expand_path("../../vendor/", ::File.dirname(__FILE__))+"/IP2PROXY-LITE-PX1.BIN").first
 
 describe LogStash::Filters::IP2Proxy do
 
