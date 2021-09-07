@@ -1,5 +1,5 @@
 # IP2Proxy Filter Plugin
-This is IP2Proxy filter plugin for Logstash that enables Logstash's users to reverse search of IP address to detect VPN servers, open proxies, web proxies, Tor exit nodes, search engine robots, data center ranges and residential proxies using IP2Proxy BIN database. Other information available includes proxy type, country, state, city, ISP, domain name, usage type, AS number, AS name, threats and last seen date. The library took the proxy IP address from **IP2Proxy BIN Data** file.
+This is IP2Proxy filter plugin for Logstash that enables Logstash's users to reverse search of IP address to detect VPN servers, open proxies, web proxies, Tor exit nodes, search engine robots, data center ranges and residential proxies using IP2Proxy BIN database. Other information available includes proxy type, country, state, city, ISP, domain name, usage type, AS number, AS name, threats, last seen date and provider names. The library took the proxy IP address from **IP2Proxy BIN Data** file.
 
 For the methods to use IP2Proxy filter plugin with Elastic Stack (Elasticsearch, Filebeat, Logstash, and Kibana), please take a look on this [tutorial](https://blog.ip2location.com/knowledge-base/how-to-use-ip2proxy-filter-plugin-with-elastic-stack).
 
@@ -64,12 +64,11 @@ output {
 |ip2proxy.is_proxy|Check whether if an IP address was a proxy. Returned value:<ul><li>-1 : errors</li><li>0 : not a proxy</li><li>1 : a proxy</li><li>2 : a data center IP address</li></ul>|
 |ip2proxy.isp|the ISP name of the proxy|
 |ip2proxy.last_seen|the last seen days ago value of proxy's IP address or domain name|
-|ip2proxy.proxy_type|the proxy type. Please visit  <a href="https://www.ip2location.com/database/px10-ip-proxytype-country-region-city-isp-domain-usagetype-asn-lastseen-threat-residential" target="_blank">IP2Location</a> for the list of proxy types supported|
+|ip2proxy.provider|the VPN service provider name if available|
+|ip2proxy.proxy_type|the proxy type. Please visit  <a href="https://www.ip2location.com/database/px11-ip-proxytype-country-region-city-isp-domain-usagetype-asn-lastseen-threat-residential-provider" target="_blank">IP2Location</a> for the list of proxy types supported|
 |ip2proxy.region|the ISO3166-2 region name of the proxy. Please visit <a href="https://www.ip2location.com/free/iso3166-2" target="_blank">ISO3166-2 Subdivision Code</a> for the information of ISO3166-2 supported|
 |ip2proxy.thread|the threat type of the proxy|
-|ip2proxy.usage_type|the usage type classification of the proxy. Please visit <a href="https://www.ip2location.com/database/px10-ip-proxytype-country-region-city-isp-domain-usagetype-asn-lastseen-threat-residential" target="_blank">IP2Location</a> for the list of usage types supported|
-
-![Example of data](https://www.ip2location.com/assets/img/logstash-filter-ip2proxy-screenshot.png?)
+|ip2proxy.usage_type|the usage type classification of the proxy. Please visit <a href="https://www.ip2location.com/database/px11-ip-proxytype-country-region-city-isp-domain-usagetype-asn-lastseen-threat-residential-provider" target="_blank">IP2Location</a> for the list of usage types supported|
 
 
 ## Support
