@@ -18,6 +18,9 @@ class LogStash::Filters::IP2Proxy < LogStash::Filters::Base
   # The field used to define iplocation as target.
   config :target, :validate => :string, :default => 'ip2proxy'
 
+  # The field used to allow user to enable the use of cache.
+  config :use_cache, :validate => :boolean, :default => true
+
   # The field used to define the size of the cache. It is not required and the default value is 10 000 
   config :cache_size, :validate => :number, :required => false, :default => 10_000
 
@@ -41,11 +44,19 @@ class LogStash::Filters::IP2Proxy < LogStash::Filters::Base
     ip = event.get(@source)
 
     return unless filter?(event)
-    if value = Cache.find(event, ip, @ip2proxyfilter, @cache_size).get('ip2proxy')
-      event.set('ip2proxy', value)
-      filter_matched(event)
+    if @use_cache
+      if value = Cache.find(event, ip, @ip2proxyfilter, @cache_size).get('ip2proxy')
+        event.set('ip2proxy', value)
+        filter_matched(event)
+      else
+        tag_iplookup_unsuccessful(event)
+      end
     else
-      tag_iplookup_unsuccessful(event)
+      if @ip2proxyfilter.handleEvent(event)
+        filter_matched(event)
+      else
+        tag_iplookup_unsuccessful(event)
+      end
     end
   end
 

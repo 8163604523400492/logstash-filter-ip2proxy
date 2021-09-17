@@ -47,9 +47,11 @@ output {
 |---|---|---|
 |source|string|Yes|
 |database|a valid filesystem path|No|
+|use_cache|boolean|No|
 
 * **source** field is a required setting that containing the IP address or hostname to get the ip information.
 * **database** field is an optional setting that containing the path to the IP2Proxy BIN database file.
+* **use_cache** field is an optional setting that used to allow user to enable the use of cache. Default value is true.
 
 
 ## Sample Output
