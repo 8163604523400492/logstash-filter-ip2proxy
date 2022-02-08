@@ -8,7 +8,7 @@ class LogStash::Filters::IP2Proxy < LogStash::Filters::Base
   config_name "ip2proxy"
 
   # The path to the IP2Proxy.BIN database file which Logstash should use.
-  # If not specified, this will default to the IP2PROXY-LITE-PX4.BIN database that embedded in the plugin.
+  # If not specified, this will default to the IP2PROXY-LITE-PX1.BIN database that embedded in the plugin.
   config :database, :validate => :path
 
   # The field containing the IP address.
@@ -20,6 +20,12 @@ class LogStash::Filters::IP2Proxy < LogStash::Filters::Base
 
   # The field used to allow user to enable the use of cache.
   config :use_cache, :validate => :boolean, :default => true
+
+  # The field used to allow user to enable the use of memory mapped file.
+  config :use_memory_mapped, :validate => :boolean, :default => false
+
+  # The field used to allow user to hide unsupported fields.
+  config :hide_unsupported_fields, :validate => :boolean, :default => false
 
   # The field used to define the size of the cache. It is not required and the default value is 10 000 
   config :cache_size, :validate => :number, :required => false, :default => 10_000
@@ -35,8 +41,8 @@ class LogStash::Filters::IP2Proxy < LogStash::Filters::Base
     end
 
     @logger.info("Using ip2proxy database", :path => @database)
-    
-    @ip2proxyfilter = org.logstash.filters.IP2ProxyFilter.new(@source, @target, @database)
+
+    @ip2proxyfilter = org.logstash.filters.IP2ProxyFilter.new(@source, @target, @database, @use_memory_mapped, @hide_unsupported_fields)
   end
 
   public
